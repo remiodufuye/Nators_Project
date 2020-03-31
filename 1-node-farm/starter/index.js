@@ -15,8 +15,12 @@ const dataObj = JSON.parse(data);
 const server = http.createServer((req,res) => {
     console.log(req.url) ; 
     const pathName = req.url ; 
+
+    // Overview Page 
     if (pathName === '/' || pathName === '/overview') {
         res.end("This is the OVERVIEW ") ; 
+
+    // Product Page 
     } else if (pathName === '/product') {
         res.end("This is the PRODUCT ") 
     }  else if (pathName === '/api') {
