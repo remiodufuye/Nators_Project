@@ -146,5 +146,18 @@
     "summary": "View of Beverly Hills",
     "description": "The Lifestyles of the Rich and Famous",
     "imageCover": "love.jpg"
+  },
+  {
+    "id": 10,
+    "name": "I am Batman and I Have a BedTime!!",
+    "duration": 10,
+    "maxGroupSize": 250,
+    "difficulty": "extremely hard",
+    "ratingsAverage": 7.7,
+    "ratingsQuantity": 87,
+    "price": 400,
+    "summary": "View of Beverly Hills",
+    "description": "The Lifestyles of the Rich and Famous",
+    "imageCover": "love.jpg"
   }
 ]
