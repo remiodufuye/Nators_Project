@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const app = express();
 
 // 1.) MIDDLE WARES
+app.use(morgan('dev'));
 app.use(express.json()); // middleware to convert to JSON
 
 app.use((req, res, next) => {
@@ -72,6 +73,37 @@ const deleteTour = (req, res) => {
   res.status(204).json({ status: 'success', data: null });
 };
 
+const getAllUsers = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This Route Is not Yet Defined !!!',
+  });
+};
+const createUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This Route is not Yet Defined !!!',
+  });
+};
+const getUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This Route is not Yet Defined !!!',
+  });
+};
+const updateUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This Route is not Yet Defines !!!',
+  });
+};
+const deleteUser = (req, res) => {
+  res.status(500).json({
+    status: 'error',
+    message: 'This Route is not Yet Defined !!!',
+  });
+};
+
 // app.get('/api/v1/tours', getAllTours);
 // app.get('/api/v1/tours/:id', getTour);
 // app.post('/api/v1/tours', createTour);
@@ -86,6 +118,14 @@ app
   .get(getTour)
   .patch(updateTour)
   .delete(deleteTour);
+
+app.route('/api/v1/users').get(getAllUsers).post(createUser);
+
+app
+  .route('/api/v1/users/:id')
+  .get(getUser)
+  .patch(updateUser)
+  .delete(deleteUser);
 
 // 4.) START SERVER
 const port = 3000;
