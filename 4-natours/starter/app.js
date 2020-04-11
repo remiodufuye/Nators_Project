@@ -1,7 +1,6 @@
 const express = require('express');
 const fs = require('fs');
 const morgan = require('morgan');
-
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const app = express();
@@ -20,7 +19,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// 3.) ROUTES
+// 2.) ROUTES
 
 app.use('/api/v1/tours', tourRouter);
 app.use('/api/v1/users', userRouter);
