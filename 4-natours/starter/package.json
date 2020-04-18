@@ -16,7 +16,8 @@
     "mongoose": "^5.9.9",
     "morgan": "^1.10.0",
     "prettier": "^2.0.4",
-    "slugify": "^1.4.0"
+    "slugify": "^1.4.0",
+    "validator": "^13.0.0"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^18.1.0",
