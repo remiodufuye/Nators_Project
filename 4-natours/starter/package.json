@@ -11,6 +11,7 @@
   "author": "Remi O",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "dotenv": "^8.2.0",
     "eslint": "^6.8.0",
     "express": "^4.17.1",
