@@ -1,3 +1,4 @@
+const { promisify } = require('util');
 const jwt = require('jsonwebtoken');
 const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
@@ -60,7 +61,6 @@ exports.protect = catchAsync(async (req, res, next) => {
   ) {
     token = req.headers.authorization.split(' ')[1];
   }
-  console.log(token);
 
   if (!token) {
     return next(
@@ -68,8 +68,55 @@ exports.protect = catchAsync(async (req, res, next) => {
     );
   }
   // 2.) Verification Token
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+
   // 3.) Check if User Still Exists
+  const currentUser = await User.findById(decoded.id);
+  if (!currentUser) {
+    return next(
+      new AppError('The user with this token no longer exists!', 401)
+    );
+  }
+
   // 4.) Check if USer changed password after the Token was issued .
 
+  if (currentUser.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError(
+        'User recently changed password , please login again !!',
+        401
+      )
+    );
+  }
+
+  // Grant Access to Protected Route!!
+  req.user = currentUser;
   next();
 });
+
+exports.restrictTo = (...roles) => {
+  return (req, res, next) => {
+    // roles is an array e.g roles['admin','lead-guide'] so role = 'user'
+    if (!roles.includes(req.user.role)) {
+      return next(
+        new AppError('You Do not Have Permission to perform this action!', 403)
+      );
+    }
+
+    next();
+  };
+};
+
+exports.forgotPassword = catchAsync(async (req, res, next) => {
+  // 1.) Get User Based on Posted email
+  const user = await User.findOne({ email: req.body.email });
+  if (!user) {
+    return next(new AppError('There is no user with that email address!', 404));
+  }
+  // 2.) Generate Random Reset Token
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+  // 3.) Send it to user's email
+});
+
+exports.resetPassword = (req, res, next) => {};
