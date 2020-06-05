@@ -13,7 +13,7 @@ export const login = async (email, password) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', 'Log in sucessful!!!');
+      showAlert('success', 'Log in sucessfully!');
       window.setTimeout(() => {
         location.assign('/');
       }, 1500);
